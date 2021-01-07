@@ -1,40 +1,29 @@
+const CACHE_NAME = "static-cache-v2";
+const DATA_CACHE_NAME = "data-cache-v1";
+
 const FILES_TO_CACHE = [
   "/",
   "/index.html",
   "/index.js",
   "/db.js",
   "/manifest.webmanifest",
-  "assets/images/icons/icon-192x192.png",
-  "assets/images/icons/icon-512x512.png",
-  "/models/transaction.js",
+  "/icons/icon-192x192.png",
+  "/icons/icon-512x512.png",
   "/style.css",
 ];
 
-const CACHE_NAME = "static-cache-v2";
-const DATA_CACHE_NAME = "data-cache-v1";
-
-
-self.addEventListener("install", evt => {
-
+self.addEventListener("install", (evt) => {
   evt.waitUntil(
-    caches.open(CACHE_NAME)
-    .then((cache) => {
-      return cache.add("/")
-    })
-  );
-    
-
-  evt.waitUntil(
-    caches.open(CACHE_NAME)
-    .then(cache => {
-    return cache.addAll(FILES_TO_CACHE);
+    caches.open(CACHE_NAME).then((cache) => {
+      console.log("Your files were pre-cached successfully!");
+    cache.addAll(FILES_TO_CACHE);
     })
   );
 
   self.skipWaiting();
 });
 
-self.addEventListener("activate", evt => {
+self.addEventListener("activate", (evt) => {
   evt.waitUntil(
     caches.keys().then(keyList => {
       return Promise.all(
@@ -64,13 +53,13 @@ self.addEventListener("fetch", evt => {
             return cache.match(evt.request);
           });
       })
-    );
+    )
     return;
   }
 
   evt.respondWith(
-    caches.open(CACHE_NAME).then((cache) => {
-      return cache.match(evt.request).then((response) => {
+    caches.open(CACHE_NAME).then(cache => {
+      return cache.match(evt.request).then(response => {
         return response || fetch(evt.request);
       });
     })
