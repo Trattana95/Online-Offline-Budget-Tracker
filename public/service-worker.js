@@ -4,18 +4,33 @@ const FILES_TO_CACHE = [
   "/index.js",
   "/db.js",
   "/manifest.webmanifest",
-  "/style.css"];
+  "assets/images/icons/icon-192x192.png",
+  "assets/images/icons/icon-512x512.png",
+  "/models/transaction.js",
+  "/style.css",
+];
 
 const CACHE_NAME = "static-cache-v2";
 const DATA_CACHE_NAME = "data-cache-v1";
 
 
 self.addEventListener("install", evt => {
+
   evt.waitUntil(
     caches.open(CACHE_NAME)
-    .then((cache) => cache.addAll(FILES_TO_CACHE))
-    
+    .then((cache) => {
+      return cache.add("/")
+    })
   );
+    
+
+  evt.waitUntil(
+    caches.open(CACHE_NAME)
+    .then(cache => {
+    return cache.addAll(FILES_TO_CACHE);
+    })
+  );
+
   self.skipWaiting();
 });
 
