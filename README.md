@@ -13,3 +13,7 @@ By inputing a transaction and amount the user simply chooses whether it is an ad
 
 #### Contributing
 Instructor provided the class with the db.js file (due to time constraints), and I relied heavily on chapters 18 Activity 18-23 in our cirriculum for this homework.
+
+
+![Screenshot (29)](https://user-images.githubusercontent.com/72782320/103865910-e5748c80-5092-11eb-8e10-311274778b27.png)
+![Screenshot (31)](https://user-images.githubusercontent.com/72782320/103865915-e6a5b980-5092-11eb-9493-ad95783182d2.png)
